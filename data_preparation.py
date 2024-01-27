@@ -1,3 +1,7 @@
+"""Please download the data from
+https://www.kaggle.com/datasets/vencerlanz09/agricultural-pests-image-dataset
+and rename it to `Pest Images.zip`
+"""
 from PIL import Image
 from pathlib import Path, PurePath
 from tqdm import tqdm

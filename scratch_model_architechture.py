@@ -16,7 +16,8 @@ def model(height, width):
             tf.keras.layers.Dense(512, activation="relu"),
             tf.keras.layers.Dropout(0.4),
             tf.keras.layers.Dense(12, activation="softmax"),
-        ]
+        ],
+        name = "BASELINE_MODLE"
     )
     models.summary()
     return models

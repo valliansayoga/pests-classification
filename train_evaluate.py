@@ -5,6 +5,7 @@ import os
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import scratch_model_architechture as sma
+import pretrained_model as pm
 
 def training_generator(path, height, width, seed, batch_size):
     train_data = tf.keras.preprocessing.image.ImageDataGenerator(
@@ -19,7 +20,7 @@ def training_generator(path, height, width, seed, batch_size):
     train_gen = train_data.flow_from_directory(
         path,
         target_size=(height, width),
-        class_mode="categorical",
+        class_mode="sparse",
         batch_size=batch_size,
         seed=seed,
     )
@@ -34,7 +35,7 @@ def non_training_generator(path, height, width, seed, batch_size):
         path,
         target_size=(height, width),
         batch_size=batch_size,
-        class_mode="categorical",
+        class_mode="sparse",
         shuffle=True,
         seed=seed,
     )
@@ -68,15 +69,20 @@ if __name__ == "__main__":
         TEST, seed=SEED, height=HEIGHT, width=WIDTH, batch_size=BATCH_SIZE
     )
     print()
-
+    
+    # Scratch Model
     m = sma.model(HEIGHT, WIDTH)
+    
+    # # Pretrained Model
+    # m = pm.mobilenet(HEIGHT, WIDTH)
+    
     m.compile(
         optimizer=tf.keras.optimizers.SGD(
             learning_rate=0.01,
             momentum=0.9,
         ),
         metrics=["accuracy"],
-        loss=["categorical_crossentropy"],
+        loss=["sparse_categorical_crossentropy"],
     )
     callbacks = [
         tf.keras.callbacks.ModelCheckpoint(

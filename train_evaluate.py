@@ -73,18 +73,21 @@ if __name__ == "__main__":
     # # Scratch Model
     # m = sma.model(HEIGHT, WIDTH)
     
-    # # Mobilenet
-    # m = pm.mobilenet(height=HEIGHT, width=WIDTH)
+    # Mobilenet
+    m = pm.mobilenet(height=HEIGHT, width=WIDTH)
     
     # # VGG19
     # m = pm.vgg19(height=HEIGHT, width=WIDTH)
-    # Inception V3
-    m = pm.inceptionv3(height=HEIGHT, width=WIDTH)
+    
+    # # Inception V3
+    # m = pm.inceptionv3(height=HEIGHT, width=WIDTH)
     
     m.compile(
         optimizer=tf.keras.optimizers.SGD(
-            learning_rate=0.01,
+            learning_rate=0.01, 
+            decay=1e-6,
             momentum=0.9,
+            nesterov=True
         ),
         metrics=["accuracy"],
         loss=["sparse_categorical_crossentropy"],

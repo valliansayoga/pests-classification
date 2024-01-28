@@ -1,4 +1,6 @@
 import tensorflow as tf
+from functool import partial
+
 
 def output_layer(inputs):
     x = tf.keras.layers.Flatten()(inputs)
@@ -8,18 +10,14 @@ def output_layer(inputs):
     
     return outputs
 
-def mobilenet(height, width, trainable=False):
-    pretrained = tf.keras.applications.mobilenet.MobileNet(
+def load_pretrained_model(name, height, width, trainable=False):
+    pretrained = name(
         input_shape=(height, width, 3),
-        alpha=1.0,
-        depth_multiplier=1,
-        dropout=0.001,
         include_top=False,
         weights='imagenet',
         classes=12,
         classifier_activation='softmax',
     )
-    
     for layer in pretrained.layers:
         layer.trainable = trainable
 
@@ -32,4 +30,13 @@ def mobilenet(height, width, trainable=False):
     )
     model.summary()
     return model
+
+mobilenet = partial(load_pretrained_model,
+                    name=tf.keras.applications.mobilenet.MobileNet)
+
+vgg19 = partial(load_pretrained_model,
+                name=tf.keras.applications.vgg19.VGG19)
+
+inceptionv3 = partial(load_pretrained_model,
+                      name=tf.keras.applications.inception_v3.InceptionV3)
 

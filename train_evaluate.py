@@ -70,11 +70,11 @@ if __name__ == "__main__":
     )
     print()
     
-    # Scratch Model
-    m = sma.model(HEIGHT, WIDTH)
+    # # Scratch Model
+    # m = sma.model(HEIGHT, WIDTH)
     
-    # # Pretrained Model
-    # m = pm.mobilenet(HEIGHT, WIDTH)
+    # Pretrained Model
+    m = pm.mobilenet(HEIGHT, WIDTH)
     
     m.compile(
         optimizer=tf.keras.optimizers.SGD(

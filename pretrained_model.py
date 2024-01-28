@@ -1,5 +1,5 @@
 import tensorflow as tf
-from functool import partial
+from functools import partial
 
 
 def output_layer(inputs):

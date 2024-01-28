@@ -74,10 +74,12 @@ if __name__ == "__main__":
     # m = sma.model(HEIGHT, WIDTH)
     
     # # Mobilenet
-    # m = pm.mobilenet(HEIGHT, WIDTH)
+    # m = pm.mobilenet(height=HEIGHT, width=WIDTH)
     
-    # VGG19
-    m = pm.vgg19(HEIGHT, WIDTH)
+    # # VGG19
+    # m = pm.vgg19(height=HEIGHT, width=WIDTH)
+    # Inception V3
+    m = pm.inceptionv3(height=HEIGHT, width=WIDTH)
     
     m.compile(
         optimizer=tf.keras.optimizers.SGD(

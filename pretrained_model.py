@@ -5,7 +5,7 @@ from functools import partial
 def output_layer(inputs):
     x = tf.keras.layers.Flatten()(inputs)
     x = tf.keras.layers.Dense(512, activation="relu")(x)
-    x = tf.keras.layers.Dropout(0.4)(x)
+    x = tf.keras.layers.Dropout(0.1)(x)
     outputs = tf.keras.layers.Dense(12, activation="softmax")(x)
     
     return outputs

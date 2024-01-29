@@ -49,7 +49,7 @@ if __name__ == "__main__":
     HEIGHT = 128
     TRAIN = DATA_PATH / "train"
     VAL = DATA_PATH / "val"
-    TEST = DATA_PATH / "test"
+    # TEST = DATA_PATH / "test"
     BATCH_SIZE = 64
     EPOCHS = 100
 
@@ -65,9 +65,9 @@ if __name__ == "__main__":
     val_gen = non_training_generator(
         VAL, seed=SEED, height=HEIGHT, width=WIDTH, batch_size=BATCH_SIZE
     )
-    test_gen = non_training_generator(
-        TEST, seed=SEED, height=HEIGHT, width=WIDTH, batch_size=BATCH_SIZE
-    )
+    # test_gen = non_training_generator(
+    #     TEST, seed=SEED, height=HEIGHT, width=WIDTH, batch_size=BATCH_SIZE
+    # )
     print()
     
     # # Scratch Model

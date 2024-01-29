@@ -56,9 +56,9 @@ def split_data(
         .copy()
         .reset_index(drop=True)
     )
-
+    
     val_test = dataframe.iloc[MASK_INDEX].copy().reset_index(drop=True)
-
+    
     TEST_MASK = val_test.groupby("name").sample(frac=test_frac / val_frac).index
     val = (
         val_test.iloc[val_test.index.difference(TEST_MASK)]
@@ -101,7 +101,7 @@ def main():
 
     df = check_dimensions(RAW_DATA_PATH)
     train, test, val = split_data(
-        dataframe=df, seed=0, train_frac=0.7, val_frac=0.3, test_frac=0.1
+        dataframe=df, seed=0, train_frac=0.8, val_frac=0.2, test_frac=0
     )
 
     # Train count

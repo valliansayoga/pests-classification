@@ -6,10 +6,10 @@ def output_layer(inputs):
     x = tf.keras.layers.Flatten()(inputs)
     x = tf.keras.layers.Dense(512, activation="relu")(x)
     x = tf.keras.layers.BatchNormalization()(x)
-    x = tf.keras.layers.Dropout(0.1)(x)
+    x = tf.keras.layers.Dropout(0.2)(x)
     x = tf.keras.layers.Dense(512, activation="relu")(x)
     x = tf.keras.layers.BatchNormalization()(x)
-    x = tf.keras.layers.Dropout(0.1)(x)
+    x = tf.keras.layers.Dropout(0.2)(x)
     outputs = tf.keras.layers.Dense(12, activation="softmax")(x)
     
     return outputs

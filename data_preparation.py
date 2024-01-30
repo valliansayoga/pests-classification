@@ -69,23 +69,39 @@ def split_data(
     return train, test, val
 
 
-def copy_to_target(source_path, target_path, train_data, test_data, val_data):
-    print("Copying files...")
-    for path, target in (
-        (train_data.path, "train"),
-        (test_data.path, "test"),
-        (val_data.path, "val"),
-    ):
-
+def copy_to_target(
+    source_path,
+    target_path,
+    train_data,
+    test_data,
+    val_data,
+    color_mode="rgb",
+):
+    print(f"Copying files {color_mode=}...\n")
+    if color_mode == "grayscale":
+        for path, target in ((train_data.path, "train"),(test_data.path, "test"),(val_data.path, "val"),):
+            # Split Type folder
+            print(f"\t{target}")
+            split_type = target_path / color_mode / target
+            for source in tqdm(path):
+                # Class folder
+                class_folder = split_type / source.relative_to(source_path).parent
+                class_folder.mkdir(exist_ok=True, parents=True)
+                img = Image.open(source).convert("L")
+                img = Image.fromarray(np.repeat(np.expand_dims(np.array(img), -1), 3, -1))  # 3 Channel grayscale
+                img.save(class_folder / f'{source.parts[-1].split(".")[0]}.JPEG', 'JPEG')
+        return
+    
+    for path, target in ((train_data.path, "train"),(test_data.path, "test"),(val_data.path, "val"),):
         # Split Type folder
-        split_type = target_path / target
-        print()
-
+        print(f"\t{target}")
+        split_type = target_path / color_mode / target
         for source in tqdm(path):
             # Class folder
             class_folder = split_type / source.relative_to(source_path).parent
             class_folder.mkdir(exist_ok=True, parents=True)
             shutil.copy(source, class_folder)
+    return
 
 
 def main():
@@ -125,6 +141,7 @@ def main():
         train_data=train,
         test_data=test,
         val_data=val,
+        # color_mode="grayscale"
     )
     print("Data split done successfully.")
 

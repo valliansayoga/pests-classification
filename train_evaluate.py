@@ -43,10 +43,11 @@ def non_training_generator(path, height, width, seed, batch_size):
 
 
 if __name__ == "__main__":
-    DATA_PATH = Path() / "Data" / "Split Data"
+    # DATA_PATH = Path() / "Data" / "Split Data" / "grayscale"
+    DATA_PATH = Path() / "Data" / "Split Data" / "rgb"
     SEED = 0
-    WIDTH = 128
-    HEIGHT = 128
+    WIDTH = 224
+    HEIGHT = 224
     TRAIN = DATA_PATH / "train"
     VAL = DATA_PATH / "val"
     # TEST = DATA_PATH / "test"
